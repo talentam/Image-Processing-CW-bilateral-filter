@@ -1,0 +1,17 @@
+function outputImg = anisotropicFilter(img, r)
+[rows,columns] = size(img);         %
+r = floor(r/2);                     % padding size
+img = double(padarray(img, [r r])); % padding
+for i = 1+r:rows+r
+    for j = 1+r:columns+r
+        neighbor = abs(img(i, j) - img(i-r:i+r,j-r:j+r));   % calculate difference
+        max_diff = max(max(neighbor));  % maximal difference 
+        neighbor = 1-neighbor/max_diff; % similarity function
+        sum_value = sum(neighbor(:));
+        temp = img(i-r:i+r,j-r:j+r).*neighbor;  % dot production
+        img(i, j) = sum(temp(:))/sum_value;     % filter for one pixel
+    end 
+end
+outputImg = img(1+r:rows+r, 1+r:columns+r);  % resize the image to the orginal size
+end
+
