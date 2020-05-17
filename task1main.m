@@ -1,5 +1,4 @@
 rng('default');
-clear;
 %load img
 img=imread('./source/lena/lena.jpg');
 img_gray = rgb2gray(img);
@@ -35,9 +34,9 @@ img_mean_filter_Gau_noise = filter2(fspecial('average',3),img_Gau_noise)/255;
 img_mean_filter_uni_noise = filter2(fspecial('average',3),img_uni_noise)/255;
 img_mean_filter_sp_noise = filter2(fspecial('average',3),img_sp)/255;
 
-SNR_img_mean_filter_Gau_noise = snr(img_mean_filter_Gau_noise, img_mean_filter_Gau_noise - im2double(img_Gau_noise));
-SNR_img_mean_filter_uni_noise = snr(img_mean_filter_uni_noise, img_mean_filter_uni_noise - im2double(img_uni_noise));
-SNR_img_mean_filter_sp_noise = snr(img_mean_filter_sp_noise, img_mean_filter_sp_noise - im2double(img_sp));
+SNR_img_mean_filter_Gau_noise = snr(img_mean_filter_Gau_noise, img_mean_filter_Gau_noise - im2double(img_gray));
+SNR_img_mean_filter_uni_noise = snr(img_mean_filter_uni_noise, img_mean_filter_uni_noise - im2double(img_gray));
+SNR_img_mean_filter_sp_noise = snr(img_mean_filter_sp_noise, img_mean_filter_sp_noise - im2double(img_gray));
 
 % plot
 subplot(3,5,1);
@@ -56,9 +55,9 @@ img_Gau_filter_Gau_noise = im2double(imfilter(img_Gau_noise,gausFilter,'replicat
 img_Gau_filter_uni_noise = im2double(imfilter(img_uni_noise,gausFilter,'replicate'));
 img_Gau_filter_sp = im2double(imfilter(img_sp,gausFilter,'replicate'));
 
-SNR_img_Gau_filter_Gau_noise = snr(img_Gau_filter_Gau_noise, img_Gau_filter_Gau_noise - im2double(img_Gau_noise));
-SNR_img_Gau_filter_uni_noise = snr(img_Gau_filter_uni_noise, img_Gau_filter_uni_noise - im2double(img_uni_noise));
-SNR_img_Gau_filter_sp = snr(img_Gau_filter_sp, img_Gau_filter_sp - im2double(img_sp));
+SNR_img_Gau_filter_Gau_noise = snr(img_Gau_filter_Gau_noise, img_Gau_filter_Gau_noise - im2double(img_gray));
+SNR_img_Gau_filter_uni_noise = snr(img_Gau_filter_uni_noise, img_Gau_filter_uni_noise - im2double(img_gray));
+SNR_img_Gau_filter_sp = snr(img_Gau_filter_sp, img_Gau_filter_sp - im2double(img_gray));
 
 % plot
 subplot(3,5,2);
@@ -76,9 +75,9 @@ img_median_filter_Gau_noise = im2double(medfilt2(img_Gau_noise, [3, 3]));
 img_median_filter_uni_noise = im2double(medfilt2(img_uni_noise, [3, 3]));
 img_median_filter_sp_noise = im2double(medfilt2(img_sp, [3, 3]));
 
-SNR_img_median_filter_Gau_noise = snr(img_median_filter_Gau_noise, img_median_filter_Gau_noise - im2double(img_Gau_noise));
-SNR_img_median_filter_uni_noise = snr(img_median_filter_uni_noise, img_median_filter_uni_noise - im2double(img_uni_noise));
-SNR_img_median_filter_sp_noise = snr(img_median_filter_sp_noise, img_median_filter_sp_noise - im2double(img_sp));
+SNR_img_median_filter_Gau_noise = snr(img_median_filter_Gau_noise, img_median_filter_Gau_noise - im2double(img_gray));
+SNR_img_median_filter_uni_noise = snr(img_median_filter_uni_noise, img_median_filter_uni_noise - im2double(img_gray));
+SNR_img_median_filter_sp_noise = snr(img_median_filter_sp_noise, img_median_filter_sp_noise - im2double(img_gray));
 
 % plot
 subplot(3,5,3);
@@ -96,9 +95,9 @@ img_anisotropic_filter_Gau_noise = anisotropicFilter(img_Gau_noise, 3);
 img_anisotropic_filter_uni_noise = anisotropicFilter(img_uni_noise, 3);
 img_anisotropic_filter_sp_noise = anisotropicFilter(img_sp, 3);
 
-SNR_img_anisotropic_filter_Gau_noise = snr(img_anisotropic_filter_Gau_noise, img_anisotropic_filter_Gau_noise - im2double(img_Gau_noise));
-SNR_img_anisotropic_filter_uni_noise = snr(img_anisotropic_filter_uni_noise, img_anisotropic_filter_uni_noise - im2double(img_uni_noise));
-SNR_img_anisotropic_filter_sp_noise = snr(img_anisotropic_filter_sp_noise, img_anisotropic_filter_sp_noise - im2double(img_sp));
+SNR_img_anisotropic_filter_Gau_noise = snr(img_anisotropic_filter_Gau_noise, img_anisotropic_filter_Gau_noise - im2double(img_gray));
+SNR_img_anisotropic_filter_uni_noise = snr(img_anisotropic_filter_uni_noise, img_anisotropic_filter_uni_noise - im2double(img_gray));
+SNR_img_anisotropic_filter_sp_noise = snr(img_anisotropic_filter_sp_noise, img_anisotropic_filter_sp_noise - im2double(img_gray));
 
 subplot(3,5,4);
 imshow(img_anisotropic_filter_Gau_noise);
@@ -115,9 +114,9 @@ img_bilateral_filter_Gau_noise = bilateralFiltering(img_Gau_noise,5,1,10);
 img_bilateral_filter_uni_noise = bilateralFiltering(img_Gau_noise,5,1,10);
 img_bilateral_filter_sp_noise = bilateralFiltering(img_Gau_noise,5,1,10);
 
-SNR_img_bilateral_filter_Gau_noise = snr(img_bilateral_filter_Gau_noise, img_bilateral_filter_Gau_noise - im2double(img_Gau_noise));
-SNR_img_bilateral_filter_uni_noise = snr(img_bilateral_filter_uni_noise, img_bilateral_filter_uni_noise - im2double(img_uni_noise));
-SNR_img_bilateral_filter_sp_noise = snr(img_bilateral_filter_sp_noise, img_bilateral_filter_sp_noise - im2double(img_sp));
+SNR_img_bilateral_filter_Gau_noise = snr(img_bilateral_filter_Gau_noise, img_bilateral_filter_Gau_noise - im2double(img_gray));
+SNR_img_bilateral_filter_uni_noise = snr(img_bilateral_filter_uni_noise, img_bilateral_filter_uni_noise - im2double(img_gray));
+SNR_img_bilateral_filter_sp_noise = snr(img_bilateral_filter_sp_noise, img_bilateral_filter_sp_noise - im2double(img_gray));
 
 subplot(3,5,5);
 imshow(img_bilateral_filter_Gau_noise);

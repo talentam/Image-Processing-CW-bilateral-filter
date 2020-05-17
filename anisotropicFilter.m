@@ -8,6 +8,9 @@ for i = 1+r:rows+r
         neighbor = abs(img(i, j) - img(i-r:i+r,j-r:j+r));   % calculate difference
         max_diff = max(max(neighbor));  % maximal difference 
         neighbor = 1-neighbor/max_diff; % similarity function
+        if max_diff == 0
+            fprintf("fuck!\n");
+        end
         sum_value = sum(neighbor(:));
         temp = img(i-r:i+r,j-r:j+r).*neighbor;  % implement the filter
         img(i, j) = sum(temp(:))/sum_value;
