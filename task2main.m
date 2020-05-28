@@ -201,10 +201,10 @@ title('best');
 %             0 -1 -2 -1 0
 %             0 0 1 0 0]; 
 %% High-frequency emphasis
-
+img=adapthisteq(img);
 img=fft2(img); %二维傅立叶变换
 img=fftshift(img);  %频移
-d0=80;
+d0=30;
 [M,N]=size(img);
 m=fix(M/2);
 n=fix(N/2);
@@ -230,8 +230,9 @@ img=img.*high_filter;
 
 
 img=real(ifft2(ifftshift(img)));  %傅里叶反变换
-img=adapthisteq(img);
-
+% img=adapthisteq(img);
+% [img,T]=histeq(img);
+% img = bilateralFiltering(img,7,1,10);
 
 subplot(2,4,2);
 imshow(img);
@@ -251,17 +252,13 @@ title('after log');
 %  unmask
 % se = strel('diamond',1);
 % mask = imdilate(mask,se);
-for i = 1:rows
-    for j = 1:columns
-        if mask(i, j) == 0
-            img(i, j) = 0;
-        end
-    end
-end
+
+img = img.*mask;
+
 img=adapthisteq(img);
 subplot(2,4,4);
 imshow(img);
-title('after eq');
+title('after eq and remove boundary');
 
 % se = strel('diamond',1);
 % img = imopen(img,se);
@@ -302,8 +299,8 @@ smallholes = holes & ~bigholes;
 img = img | smallholes;
 img = bwareaopen(img, 110, 8);
 
-se = strel('square',2);
-img = imdilate(img,se);
+% se = strel('square',2);
+% img = imdilate(img,se);
 
 subplot(2,4,8);
 imshow(img);

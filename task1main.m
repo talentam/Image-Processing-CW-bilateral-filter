@@ -53,11 +53,11 @@ title('sp noise and mean filter');
 gausFilter = fspecial('gaussian',[5 5],1);   %¸ßË¹ÂË²¨
 img_Gau_filter_Gau_noise = im2double(imfilter(img_Gau_noise,gausFilter,'replicate'));
 img_Gau_filter_uni_noise = im2double(imfilter(img_uni_noise,gausFilter,'replicate'));
-img_Gau_filter_sp = im2double(imfilter(img_sp,gausFilter,'replicate'));
+img_Gau_filter_sp_noise = im2double(imfilter(img_sp,gausFilter,'replicate'));
 
 SNR_img_Gau_filter_Gau_noise = snr(img_Gau_filter_Gau_noise, img_Gau_filter_Gau_noise - im2double(img_gray));
 SNR_img_Gau_filter_uni_noise = snr(img_Gau_filter_uni_noise, img_Gau_filter_uni_noise - im2double(img_gray));
-SNR_img_Gau_filter_sp = snr(img_Gau_filter_sp, img_Gau_filter_sp - im2double(img_gray));
+SNR_img_Gau_filter_sp = snr(img_Gau_filter_sp_noise, img_Gau_filter_sp_noise - im2double(img_gray));
 
 % plot
 subplot(3,5,2);
@@ -67,7 +67,7 @@ subplot(3,5,7);
 imshow(img_Gau_filter_uni_noise);
 title('uni noise and Gaussian filter');
 subplot(3,5,12);
-imshow(img_Gau_filter_sp);
+imshow(img_Gau_filter_sp_noise);
 title('sp noise and Gaussian filter');
 
 %% Median filter
@@ -111,8 +111,8 @@ title('sp noise and Anisotropic filter');
 
 %% Bilateral filtering  
 img_bilateral_filter_Gau_noise = bilateralFiltering(img_Gau_noise,5,1,10);
-img_bilateral_filter_uni_noise = bilateralFiltering(img_Gau_noise,5,1,10);
-img_bilateral_filter_sp_noise = bilateralFiltering(img_Gau_noise,5,1,10);
+img_bilateral_filter_uni_noise = bilateralFiltering(img_uni_noise,5,1,10);
+img_bilateral_filter_sp_noise = bilateralFiltering(img_sp,5,1,10);
 
 SNR_img_bilateral_filter_Gau_noise = snr(img_bilateral_filter_Gau_noise, img_bilateral_filter_Gau_noise - im2double(img_gray));
 SNR_img_bilateral_filter_uni_noise = snr(img_bilateral_filter_uni_noise, img_bilateral_filter_uni_noise - im2double(img_gray));
@@ -130,7 +130,29 @@ title('sp noise and Bilateral filter');
 
 
 
-%%
+%% output
+filepath=pwd;
+cd('source/task1img');
+imwrite(img_mean_filter_Gau_noise,'mean_Gau.jpg');
+imwrite(img_mean_filter_uni_noise,'mean_uni.jpg');
+imwrite(img_mean_filter_sp_noise,'mean_sp.jpg');
+
+imwrite(img_Gau_filter_Gau_noise,'Gau_Gau.jpg');
+imwrite(img_Gau_filter_uni_noise,'Gau_uni.jpg');
+imwrite(img_Gau_filter_sp_noise,'Gau_sp.jpg');
+
+imwrite(img_median_filter_Gau_noise,'median_Gau.jpg');
+imwrite(img_median_filter_uni_noise,'median_uni.jpg');
+imwrite(img_median_filter_sp_noise,'median_sp.jpg');
+
+imwrite(img_anisotropic_filter_Gau_noise,'anisotropic_Gau.jpg');
+imwrite(img_anisotropic_filter_uni_noise,'anisotropic_uni.jpg');
+imwrite(img_anisotropic_filter_sp_noise,'anisotropic_sp.jpg');
+
+imwrite(img_bilateral_filter_Gau_noise,'bilateral_Gau.jpg');
+imwrite(img_bilateral_filter_uni_noise,'bilateral_uni.jpg');
+imwrite(img_bilateral_filter_sp_noise,'bilateral_sp.jpg');
+cd(filepath);
 
 
 

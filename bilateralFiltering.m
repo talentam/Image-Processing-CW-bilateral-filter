@@ -16,5 +16,6 @@ for i = r+1:rows+r
         outputImg(i-r,j-r) = sum(s(:))/sum(w(:));         
     end
 end
+end
 
 
