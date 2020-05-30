@@ -30,7 +30,7 @@ for i=1:rows
    end
 end
 img=img.*high_filter;
-img=real(ifft2(ifftshift(img)));  
+img=real(ifft2(ifftshift(img)));
 
 subplot(2,4,3);
 imshow(img);
@@ -45,10 +45,20 @@ imshow(img);
 title('Gaussian filter');
 
 % loG filter
-hsize = 11;
-sigma = 0.29;
-filter = fspecial('log', hsize, sigma);
-img=double(imfilter(img, filter));
+% hsize = 11;
+% sigma = 0.29;
+% filter = fspecial('log', hsize, sigma);
+% img=double(imfilter(img, filter));
+hy = fspecial('sobel');
+hx = hy';
+gx = imfilter(img, hx); % x component of Sobel gradient
+gy = imfilter(img, hy); % y component
+img = hypot(gx,gy); % magnitude of Sobel gradient...
+
+filepath=pwd;
+cd('source/task2img');
+imwrite(img,'sob.jpg');
+cd(filepath);
 
 subplot(2,4,5);
 imshow(img);

@@ -8,26 +8,14 @@ imgSize = size(img_gray);
 Gaussian_noise = randn(imgSize)*sigma;
 img_Gau_noise = uint8(double(img_gray)+Gaussian_noise);
 
-% subplot(3,5,5);
-% imshow(img_Gau_noise);
-% title('img_Gau_noise');
-
 %% uniform noise
 a = 50;
 imgSize = size(img_gray);
 uniform_noise = (rand(imgSize)-0.5)*2*a;
 img_uni_noise = uint8(double(img_gray)+uniform_noise);
 
-% subplot(3,5,10);
-% imshow(img_uni_noise);
-% title('img_uni_noise');
-
 %% Salt & pepper noise
 img_sp = imnoise(img_gray,'salt & pepper',0.1);
-
-% subplot(3,5,15);
-% imshow(img_sp);
-% title('img_sp');
 
 %% Mean filter
 img_mean_filter_Gau_noise = filter2(fspecial('average',3),img_Gau_noise)/255;
@@ -50,7 +38,7 @@ imshow(img_mean_filter_sp_noise);
 title('sp noise and mean filter');
 
 %% Gaussian filter
-gausFilter = fspecial('gaussian',[5 5],1);   %¸ßË¹ÂË²¨
+gausFilter = fspecial('gaussian',[5 5],1);
 img_Gau_filter_Gau_noise = im2double(imfilter(img_Gau_noise,gausFilter,'replicate'));
 img_Gau_filter_uni_noise = im2double(imfilter(img_uni_noise,gausFilter,'replicate'));
 img_Gau_filter_sp_noise = im2double(imfilter(img_sp,gausFilter,'replicate'));
@@ -128,32 +116,26 @@ subplot(3,5,15);
 imshow(img_bilateral_filter_sp_noise);
 title('sp noise and Bilateral filter');
 
-
-
 %% output
-filepath=pwd;
-cd('source/task1img');
-imwrite(img_mean_filter_Gau_noise,'mean_Gau.jpg');
-imwrite(img_mean_filter_uni_noise,'mean_uni.jpg');
-imwrite(img_mean_filter_sp_noise,'mean_sp.jpg');
-
-imwrite(img_Gau_filter_Gau_noise,'Gau_Gau.jpg');
-imwrite(img_Gau_filter_uni_noise,'Gau_uni.jpg');
-imwrite(img_Gau_filter_sp_noise,'Gau_sp.jpg');
-
-imwrite(img_median_filter_Gau_noise,'median_Gau.jpg');
-imwrite(img_median_filter_uni_noise,'median_uni.jpg');
-imwrite(img_median_filter_sp_noise,'median_sp.jpg');
-
-imwrite(img_anisotropic_filter_Gau_noise,'anisotropic_Gau.jpg');
-imwrite(img_anisotropic_filter_uni_noise,'anisotropic_uni.jpg');
-imwrite(img_anisotropic_filter_sp_noise,'anisotropic_sp.jpg');
-
-imwrite(img_bilateral_filter_Gau_noise,'bilateral_Gau.jpg');
-imwrite(img_bilateral_filter_uni_noise,'bilateral_uni.jpg');
-imwrite(img_bilateral_filter_sp_noise,'bilateral_sp.jpg');
-cd(filepath);
-
-
-
-
+% filepath=pwd;
+% cd('source/task1img');
+% imwrite(img_mean_filter_Gau_noise,'mean_Gau.jpg');
+% imwrite(img_mean_filter_uni_noise,'mean_uni.jpg');
+% imwrite(img_mean_filter_sp_noise,'mean_sp.jpg');
+% 
+% imwrite(img_Gau_filter_Gau_noise,'Gau_Gau.jpg');
+% imwrite(img_Gau_filter_uni_noise,'Gau_uni.jpg');
+% imwrite(img_Gau_filter_sp_noise,'Gau_sp.jpg');
+% 
+% imwrite(img_median_filter_Gau_noise,'median_Gau.jpg');
+% imwrite(img_median_filter_uni_noise,'median_uni.jpg');
+% imwrite(img_median_filter_sp_noise,'median_sp.jpg');
+% 
+% imwrite(img_anisotropic_filter_Gau_noise,'anisotropic_Gau.jpg');
+% imwrite(img_anisotropic_filter_uni_noise,'anisotropic_uni.jpg');
+% imwrite(img_anisotropic_filter_sp_noise,'anisotropic_sp.jpg');
+% 
+% imwrite(img_bilateral_filter_Gau_noise,'bilateral_Gau.jpg');
+% imwrite(img_bilateral_filter_uni_noise,'bilateral_uni.jpg');
+% imwrite(img_bilateral_filter_sp_noise,'bilateral_sp.jpg');
+% cd(filepath);
