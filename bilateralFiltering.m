@@ -17,5 +17,3 @@ for i = r+1:rows+r
     end
 end
 end
-
-

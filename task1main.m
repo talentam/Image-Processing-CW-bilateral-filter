@@ -79,9 +79,9 @@ imshow(img_median_filter_sp_noise);
 title('sp noise and median filter');
 %% Anisotropic filter
 
-img_anisotropic_filter_Gau_noise = anisotropicFilter(img_Gau_noise, 3);
-img_anisotropic_filter_uni_noise = anisotropicFilter(img_uni_noise, 3);
-img_anisotropic_filter_sp_noise = anisotropicFilter(img_sp, 3);
+img_anisotropic_filter_Gau_noise = anisotropicFilter(img_Gau_noise, 3, 1);
+img_anisotropic_filter_uni_noise = anisotropicFilter(img_uni_noise, 3, 1);
+img_anisotropic_filter_sp_noise = anisotropicFilter(img_sp, 3, 1);
 
 SNR_img_anisotropic_filter_Gau_noise = snr(img_anisotropic_filter_Gau_noise, img_anisotropic_filter_Gau_noise - im2double(img_gray));
 SNR_img_anisotropic_filter_uni_noise = snr(img_anisotropic_filter_uni_noise, img_anisotropic_filter_uni_noise - im2double(img_gray));
